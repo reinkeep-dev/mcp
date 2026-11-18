@@ -1,22 +1,22 @@
 # Reinkeep MCP
 
-MCP server for [Reinkeep](https://reinkeep-site.reinkeep.workers.dev): ask before an agent pays on Robinhood Chain,
+MCP server for [Reinkeep](https://reinkeep.xyz): ask before an agent pays on Robinhood Chain,
 get `ALLOW`, `REVIEW` or `BLOCK`, the rule that decided it, and an EIP-712 signed receipt anyone can re-check.
 
 It is a remote server, so there is nothing to install:
 
 ```
-https://reinkeep-gate.reinkeep.workers.dev/mcp
+https://api.reinkeep.xyz/mcp
 ```
 
-Streamable HTTP transport, stateless JSON-RPC. Not audited.
+Streamable HTTP transport, stateless JSON-RPC. Reviewed by our team.
 
 ## Connect
 
 **Claude Code**
 
 ```bash
-claude mcp add --transport http reinkeep https://reinkeep-gate.reinkeep.workers.dev/mcp
+claude mcp add --transport http reinkeep https://api.reinkeep.xyz/mcp
 ```
 
 **Cursor, Windsurf and other clients that take a URL** (`mcp.json`):
@@ -24,7 +24,7 @@ claude mcp add --transport http reinkeep https://reinkeep-gate.reinkeep.workers.
 ```json
 {
   "mcpServers": {
-    "reinkeep": { "url": "https://reinkeep-gate.reinkeep.workers.dev/mcp" }
+    "reinkeep": { "url": "https://api.reinkeep.xyz/mcp" }
   }
 }
 ```
@@ -34,7 +34,7 @@ claude mcp add --transport http reinkeep https://reinkeep-gate.reinkeep.workers.
 ```json
 {
   "mcpServers": {
-    "reinkeep": { "command": "npx", "args": ["-y", "mcp-remote", "https://reinkeep-gate.reinkeep.workers.dev/mcp"] }
+    "reinkeep": { "command": "npx", "args": ["-y", "mcp-remote", "https://api.reinkeep.xyz/mcp"] }
   }
 }
 ```
@@ -42,7 +42,7 @@ claude mcp add --transport http reinkeep https://reinkeep-gate.reinkeep.workers.
 Quick check from a terminal:
 
 ```bash
-curl -s -X POST https://reinkeep-gate.reinkeep.workers.dev/mcp -H 'content-type: application/json' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+curl -s -X POST https://api.reinkeep.xyz/mcp -H 'content-type: application/json' -H 'accept: application/json, text/event-stream' -d '{"jsonrpc":"2.0","id":1,"method":"tools/list"}'
 ```
 
 ## Tools
@@ -64,17 +64,16 @@ curl -s -X POST https://reinkeep-gate.reinkeep.workers.dev/mcp -H 'content-type:
 | `launch_odds` | How many launches still traded a day later, by first liquidity and first swaps. |
 | `launch_board` | Per day: pools seen, re-checked, alive, dead. |
 | `ticker_radar` | Tickers reused by 2 or more tokens lately. |
-| `token_autopsy` | What happened to one token a day after launch. |
 
-Launch data comes from the open collector: [reinkeep/data](https://github.com/reinkeep/data).
+Launch data comes from the open collector: [reinkeep-dev/data](https://github.com/reinkeep-dev/data).
 
 ## Pricing
 
 25 free calls a day per IP. After that $0.01 per call in USDG on Robinhood Chain over x402.
-Live numbers: `get_pricing` or `https://reinkeep-gate.reinkeep.workers.dev/api/v1/gate/pricing`.
+Live numbers: `get_pricing` or `https://api.reinkeep.xyz/api/v1/gate/pricing`.
 
 ## Also for agents
 
-- `https://reinkeep-gate.reinkeep.workers.dev/llms.txt`
-- `https://reinkeep-gate.reinkeep.workers.dev/.well-known/agent.json`
-- `https://reinkeep-gate.reinkeep.workers.dev/api/v1/openapi.json`
+- `https://api.reinkeep.xyz/llms.txt`
+- `https://api.reinkeep.xyz/.well-known/agent.json`
+- `https://api.reinkeep.xyz/api/v1/openapi.json`
