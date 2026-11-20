@@ -137,3 +137,7 @@ Live numbers: `get_pricing` or `https://api.reinkeep.xyz/api/v1/gate/pricing`.
 - `https://api.reinkeep.xyz/llms.txt`
 - `https://api.reinkeep.xyz/.well-known/agent.json`
 - `https://api.reinkeep.xyz/api/v1/openapi.json`
+
+## License
+
+MIT. See [`LICENSE`](LICENSE).
