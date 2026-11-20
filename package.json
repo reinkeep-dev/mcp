@@ -1,0 +1,17 @@
+{
+  "name": "reinkeep-guard",
+  "version": "0.1.0",
+  "description": "Local spend guard for AI agents on Robinhood Chain: CLI, MCP server over stdio, and a signer wrapper",
+  "license": "MIT",
+  "type": "module",
+  "private": true,
+  "engines": { "node": ">=22.18" },
+  "bin": {
+    "reinkeep-guard": "src/cli.ts",
+    "reinkeep-guard-mcp": "src/mcp-stdio.ts"
+  },
+  "scripts": {
+    "test": "node --test test/*.test.ts",
+    "demo": "node demo/run.ts"
+  }
+}
